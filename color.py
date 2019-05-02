@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+often=5
 cv2.namedWindow("preview")
 
 cap = cv2.VideoCapture(0)
@@ -25,7 +25,16 @@ def avrg(list,index):
         return 0
 
 
-
+"""
+color=input("you color is (in RGB):")
+def fromrgbtogbr(color):
+    r=color[0]
+    g=color[1]
+    b=color[2]
+    color[0]=b
+    color[1]=g
+    color[2]=r
+    """
 color=[93, 161, 95]
 ok=list()
 drawing=1
@@ -39,11 +48,11 @@ while rval:
 
     #print(frame[0][w-1][0],frame[0][w-1][1],frame[0][w-1][2])
     if drawing==1:
-        for i in range(int(int(h-h%15)/15)):
-            for j in range(int(int(w-w%15)/15)):
-                cdiff=a(frame[i*15][j*15][0],color[0])+a(frame[i*15][j*15][1],color[1])+a(frame[i*15][j*15][2],color[2])
+        for i in range(int(int(h-h%often)/often)):
+            for j in range(int(int(w-w%often)/often)):
+                cdiff=a(frame[i*often][j*often][0],color[0])+a(frame[i*often][j*often][1],color[1])+a(frame[i*often][j*often][2],color[2])
                 if cdiff<50:
-                    ok.append([i*15,j*15,cdiff])
+                    ok.append([i*often,j*often,cdiff])
 
         for j in range(3):
             for m in range(10):
